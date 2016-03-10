@@ -1,50 +1,71 @@
 package com.example.entity;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Id;
+import javax.persistence.GeneratedValue;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class User {
-	@JsonIgnore
-    @ManyToOne
-    private Client client;
 	
-	@Id 
+	@JsonIgnore
+	@ManyToOne
+	public Client client;	
+	User(){
+	}
+	public User(Client client,String firstName, String lastName,String phone) {
+		
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.phone =phone;
+		this.client=client;
+	}
+
+	
+	
+	@Id
 	@GeneratedValue
 	private Long id;
-
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
-	}
+	private String firstName;
+	private String lastName;
+	private String phone;
 	public String getFirstName() {
 		return firstName;
 	}
+
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
+	
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
 	public String getPhone() {
 		return phone;
 	}
+
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-	User() { // jpa only
-    }
-	public User(Client client,String firstName, String phone) {
-		this.client=client;
-		this.firstName = firstName;
-		this.phone = phone;
+	
+	public Long getId() {
+		return id;
 	}
 
-	@JsonIgnore
-	private String firstName;
-	private String phone;
+	public Client getClient() {
+		return client;
+	}
+
+	public void setClient(Client client) {
+		this.client = client;
+	}
 	
-	
+
 }
